@@ -16,37 +16,21 @@
         if (color === 'blue' && operation === 'sub' && blue !== 0) blue = blue - 12.75;
     };
 
+    function blendColors(redOp, greenOp, blueOp) {
+        blend10('red', redOp)
+        blend10('green', greenOp);
+        blend10('blue', blueOp);
+        palette.style.background = `rgb(${red}, ${green}, ${blue})`;
+    };
+
     document.querySelector('#colors').addEventListener('click', function({ target }) {
-        let color = target.id
+        let color = target.id;
+
         if (color === 'colors') return;
-        
-        if (color === 'red') {
-            blend10('red', 'add')
-            blend10('green', 'sub');
-            blend10('blue', 'sub');
-            palette.style.background = `rgb(${red}, ${green}, ${blue})`;
-        }
-
-        if (color === 'green') {
-            blend10('red', 'sub');
-            blend10('green', 'add');
-            blend10('blue', 'sub');
-            palette.style.background = `rgb(${red}, ${green}, ${blue})`;
-        }
-
-        if (color === 'blue') {
-            blend10('red', 'sub');
-            blend10('green', 'sub');
-            blend10('blue', 'add');
-            palette.style.background = `rgb(${red}, ${green}, ${blue})`;
-        }
-
-        if (color === 'yellow') {
-            blend10('red', 'add');
-            blend10('green', 'add');
-            blend10('blue', 'sub');
-            palette.style.background = `rgb(${red}, ${green}, ${blue})`;
-        }
+        if (color === 'red') blendColors('add', 'sub', 'sub');
+        if (color === 'green') blendColors('sub', 'add', 'sub');
+        if (color === 'blue') blendColors('sub', 'sub', 'add');
+        if (color === 'yellow') blendColors('add', 'add', 'sub');
     });
 
 
